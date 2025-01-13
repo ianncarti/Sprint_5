@@ -1,14 +1,15 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from helpers import random_user_generator
 from locators import RegistrationPageLocators, LoginPageLocators
 from urls import AppUrls
 
 
 class TestRegistration:
 
-    def test_registration_with_valid_creds_success(self, browser, random_user_generator):
-        # получаем сгенерированные данные из фикстуры
-        username, email, password = random_user_generator
+    def test_registration_with_valid_creds_success(self, browser):
+        # генерируем рандомные креды
+        username, email, password = random_user_generator()
 
         # открываем страницу регистрации
         browser.get(AppUrls.register_page)
@@ -29,9 +30,9 @@ class TestRegistration:
         assert browser.current_url == AppUrls.login_page
 
 
-    def test_registration_with_invalid_pass_shows_error(self, browser, random_user_generator):
-        # получаем сгенерированные данные из фикстуры
-        username, email, password = random_user_generator
+    def test_registration_with_invalid_pass_shows_error(self, browser):
+        # генерируем рандомные креды
+        username, email, password = random_user_generator()
 
         # открываем страницу регистрации
         browser.get(AppUrls.register_page)
